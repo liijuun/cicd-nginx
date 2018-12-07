@@ -1,22 +1,21 @@
-#!groovy
-pipeline {
-    agent any
+node {
+  def app
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-    }
+
+  stage('Clone repository'){
+    checkout scm
+  }
+
+  stage('Build image'){
+    docker.build("liijuun/nginx")
+  }
+
+  stage('Test image'){
+    sh 'echo "Test Passed"'
+  }
+
+
+  stage('Publish image'){
+    sh 'echo "image published"'
+  }
 }
