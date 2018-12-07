@@ -2,7 +2,8 @@ node {
   def app
   def image_name
   def image_tag
-
+  def container_name="nginx"
+  
   stage('Clone repository'){
     checkout scm
   }
@@ -23,9 +24,8 @@ node {
   }
 
   stage('Deploy image'){
-    def nginx_container = docker.container('nginx')
-    nginx_container.stop()
+    sh "docker container rm -f ${container_name}"
 
-    docker.image("${image_name}:${image_tag}").run("--name nginx -d -p 9001:80")
+    sh "docker run --name ${container_name} -d -p 9001:80 ${image_name}:${image_tag}"
   }
 }
