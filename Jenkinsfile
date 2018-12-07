@@ -7,7 +7,6 @@ node {
   }
 
   stage('Build image'){
-    sh 'usermod -aG docker jenkins'
     docker.build("liijuun/nginx")
   }
 
