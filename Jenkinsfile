@@ -7,7 +7,7 @@ node {
   }
 
   stage('Build image'){
-    docker.build("liijuun/nginx")
+    docker.build("liijuun/nginx:${BUILD_NUMBER}")
   }
 
   stage('Test image'){
