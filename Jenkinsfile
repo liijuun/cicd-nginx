@@ -22,7 +22,7 @@ node {
 
   stage('Publish image'){
     docker.withRegistry('https://index.docker.io/v1/', 'DockerHubCredential'){
-	  docker.push("${image_name}:${image_tag}")
+	  sh "docker push ${image_name}:${image_tag}"
 	}
     sh 'echo "image published"'
   }
