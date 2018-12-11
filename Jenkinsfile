@@ -3,6 +3,7 @@ node {
   def image_name
   def image_tag
   def container_name="nginx"
+  def dockerhub=""
   
   stage('Clone repository'){
     checkout scm
@@ -20,6 +21,9 @@ node {
 
 
   stage('Publish image'){
+    withDockerRegistry(url="https://hub.docker.com/", credentialsId='DockerHubCredential'){
+	  sh 'docker push "${image_name}:${image_tag}"'
+	}
     sh 'echo "image published"'
   }
 
