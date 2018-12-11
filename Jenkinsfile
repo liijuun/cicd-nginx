@@ -9,27 +9,28 @@ node {
     checkout scm
   }
 
-  stage('Build image'){
+  stage('Build Docker image'){
     image_name="liijuun/nginx"
     image_tag="1.${BUILD_NUMBER}"
     docker.build("${image_name}:${image_tag}")
   }
 
-  stage('Test image'){
+  stage('Test Docker image'){
     sh 'echo "Test Passed"'
   }
 
 
-  stage('Publish image'){
+  stage('Publish Docker image'){
     docker.withRegistry('https://index.docker.io/v1/', 'DockerHubCredential'){
 	  sh "docker push ${image_name}:${image_tag}"
 	}
     sh 'echo "image published"'
   }
 
-  stage('Deploy image'){
-    sh "docker container rm -f ${container_name}"
-
-    sh "docker run --name ${container_name} -d -p 9001:80 ${image_name}:${image_tag}"
+  stage('Deploy on Kubernetes'){
+    #sh "docker container rm -f ${container_name}"
+    #sh "docker run --name ${container_name} -d -p 9001:80 ${image_name}:${image_tag}"
+	
+	
   }
 }
