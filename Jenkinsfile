@@ -21,7 +21,7 @@ node {
 
 
   stage('Publish image'){
-    docker.withRegistry('https://hub.docker.com/', 'DockerHubCredential'){
+    docker.withRegistry('DockerHubCredential'){
 	  docker.push("${image_name}:${image_tag}")
 	}
     sh 'echo "image published"'
