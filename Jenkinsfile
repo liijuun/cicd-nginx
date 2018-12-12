@@ -32,7 +32,7 @@ node {
     //sh "docker run --name ${container_name} -d -p 9001:80 ${image_name}:${image_tag}"
 	
 	sh 'echo "Deploy docker image on Kubernetes"'
-	sh "sed -i \\'s/DYNAMICVERSION/${image_tag}/\\'"
+	sh "sed -i \\'s/DYNAMICVERSION/${image_tag}/\\' nginx-deployment-service.yaml"
 	
 	kubernetesDeploy(kubeconfigId: 'kubernetesConfig',
                  configs: 'nginx-deployment-service.yaml',
