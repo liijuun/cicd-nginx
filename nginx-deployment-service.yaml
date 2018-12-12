@@ -41,6 +41,7 @@ spec:
     port: 80
     protocol: TCP
     targetPort: 80
+    nodeport: 30010
   selector:
     app: nginx
-  type: LoadBalancer
+  type: NodePort
