@@ -8,9 +8,9 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 30%        # how many pods we can add at a time
-      maxUnavailable: 50%  # maxUnavailable define how many pods can be unavailable
-                         # during the rolling update
+      maxSurge: 30%
+      maxUnavailable: 50%
+                        
   selector:
     matchLabels:
       app: nginx
@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: liijuun/nginx:1.9
+        image: IMAGE
         ports:
         - containerPort: 80
 ---
