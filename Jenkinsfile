@@ -30,7 +30,7 @@ node {
   stage('Deploy on Kubernetes'){
     //sh "docker container rm -f ${container_name}"
     //sh "docker run --name ${container_name} -d -p 9001:80 ${image_name}:${image_tag}"
-	sh "sed -i \\'s%IMAGE%${image_name}:${image_tag}%\\'"
+	//sh "sed -i \\'s%IMAGE%${image_name}:${image_tag}%\\'"
 	
 	kubernetesDeploy(kubeconfigId: 'kubernetesConfig',               // REQUIRED
 
